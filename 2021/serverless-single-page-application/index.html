@@ -13,14 +13,14 @@
         <meta name="author" content="NGW">
       
       
-        <link rel="canonical" href="https://ngwork0301.github.io/2021/python-debug-gdb/">
+        <link rel="canonical" href="https://ngwork0301.github.io/2021/serverless-single-page-application/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
     
     
       
-        <title>gdbでpythonをデバッグ - NGW's weblog</title>
+        <title>[読書]サーバレスシングルページアプリケーション - NGW's weblog</title>
       
     
     
@@ -85,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gdbpython" class="md-skip">
+        <a href="#_1" class="md-skip">
           コンテンツにスキップ
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              gdbでpythonをデバッグ
+              [読書]サーバレスシングルページアプリケーション
             
           </span>
         </div>
@@ -270,6 +270,18 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../python-debug-gdb/" class="md-nav__link">
+        gdbでpythonをデバッグ
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -282,12 +294,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          gdbでpythonをデバッグ
+          [読書]サーバレスシングルページアプリケーション
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        gdbでpythonをデバッグ
+        [読書]サーバレスシングルページアプリケーション
       </a>
       
         
@@ -305,15 +317,90 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    リンク
+  <a href="#_2" class="md-nav__link">
+    読んだ本
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    記事投稿にあたり
+  <a href="#_3" class="md-nav__link">
+    モチベーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    かかった時間など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    完成したもの
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    ざっくりと理解したこと
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    ハマったところ
+  </a>
+  
+    <nav class="md-nav" aria-label="ハマったところ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cognitogoogle" class="md-nav__link">
+    Cognito/Google認証がなかなかうまくいかなかった。
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amazon-api-gatewaylambda" class="md-nav__link">
+    Amazon API GatewayをつかったLambda関数の呼び出しが何度やってもコケる。
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    感想
+  </a>
+  
+    <nav class="md-nav" aria-label="感想">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    よくなかったところ(本を選ぶ上での反省点)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    今後の展望など
   </a>
   
 </li>
@@ -322,18 +409,6 @@
   
 </nav>
       
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../serverless-single-page-application/" class="md-nav__link">
-        [読書]サーバレスシングルページアプリケーション
-      </a>
     </li>
   
 
@@ -382,15 +457,90 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    リンク
+  <a href="#_2" class="md-nav__link">
+    読んだ本
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    記事投稿にあたり
+  <a href="#_3" class="md-nav__link">
+    モチベーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    かかった時間など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    完成したもの
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    ざっくりと理解したこと
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    ハマったところ
+  </a>
+  
+    <nav class="md-nav" aria-label="ハマったところ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cognitogoogle" class="md-nav__link">
+    Cognito/Google認証がなかなかうまくいかなかった。
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amazon-api-gatewaylambda" class="md-nav__link">
+    Amazon API GatewayをつかったLambda関数の呼び出しが何度やってもコケる。
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    感想
+  </a>
+  
+    <nav class="md-nav" aria-label="感想">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    よくなかったところ(本を選ぶ上での反省点)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    今後の展望など
   </a>
   
 </li>
@@ -408,16 +558,106 @@
               
                 
                 
-                <h1 id="gdbpython">gdbでpythonをデバッグ</h1>
-<p><code>#python</code> <code>#gdb</code> <code>#zenn</code></p>
-<h2 id="_1"><img alt="🔗" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f517.svg" title=":link:" /> リンク</h2>
-<p>zennにて記事を投稿<br />
-→ <strong><a href="https://zenn.dev/ngw/articles/python-debug-gdb">こちら</a></strong></p>
-<h2 id="_2"><img alt="📝" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4dd.svg" title=":pencil:" /> 記事投稿にあたり</h2>
+                <h1 id="_1">[読書]サーバレスシングルページアプリケーション</h1>
+<p><code>#spa</code> <code>#JavaScript</code> <code>#OReilly</code> <code>#tdd</code> <code>#しがないラジオ</code></p>
+<h2 id="_2"><img alt="📕" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4d5.svg" title=":closed_book:" /> 読んだ本</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.oreilly.co.jp/books/9784873118062/">サーバーレスシングルページアプリケーション<br/>――S3、AWS Lambda、API Gateway、DynamoDB、Cognitoで構築するスケーラブルなWebサービス </a></td>
+<td align="center"><img alt="" src="https://www.oreilly.co.jp/books/images/picture978-4-87311-806-2.gif" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3"><img alt="💪" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4aa.svg" title=":muscle:" /> モチベーション</h2>
 <ul>
-<li>Qiitaにも記事いれていないため、完全初投稿 <img alt="🎉" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f389.svg" title=":tada:" /></li>
-<li><a href="https://mito-web-engineer.connpass.com/">水戸WEBエンジニア勉強会</a> にて投稿することを宣言することで、やらざるをえない状態にしてみたので、なんとか投稿できた。やっぱり強制的にやる環境にしちゃうのが大事そう</li>
-<li>結果、勉強会slackに通知できたのでそこそこみてもらえる機会が増えてよかった。観ていただけて、ありがたい  <img alt="👏" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f44f.svg" title=":clap:" /></li>
+<li>サーバサイド(ありきで開発してきた)エンジニアだったので、「サーバレス」ということがどういうことなのか知りたかった。</li>
+<li>個人ではAWSは触ったことがなかったので、触れておきたかった。</li>
+<li><a href="https://shiganai.org/ep/ep19-spa">しがないラジオ ep.19</a> で <a href="https://twitter.com/search?q=%40zuckey_17&amp;src=typd&amp;lang=ja">@zuckey_17</a> さんがおすすめしていて、ピンときたのが一番のきっかけ。</li>
+<li>AWSは先に料金体系を学ばないとどこでお金がかかるのかわからなくて着手しにくいが、ちょっとAWSのことをしらべても料金体系が決してわかりやすい印象がなく、まずは手っ取り早く触りたかった。</li>
+<li>しがないラジオで聴いた感触で、「本のボリュームが軽く、本のとおりに写経ですすめていけば無料でセキュリティやスケールアップのことを含めてスタディできる」というのが好印象だったので、やってみた。</li>
+<li>実用的な内容になっているという前評価をみた。チュートリアルが終わっても、セキュリティやスケールアップの観点がないと、「とはいえ、現実問題案件としてつかえるの？<img alt="😒" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f612.svg" title=":unamused:" />」ということになりがちなので、それが書かれている良書だと思ってスタディすることにした。</li>
+</ul>
+<h2 id="_4"><img alt="🕐" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f550.svg" title=":clock1:" /> かかった時間など</h2>
+<ul>
+<li>期間
+2021/6/2 〜 2021/8/16</li>
+<li>トータル時間
+37 hくらい。
+途中以下に記載するところでだいぶハマったので、それがなければさらっと終われるはず</li>
+<li>やりかた<ul>
+<li>githubに写経用のリポジトリをつくって、各項理解したことをREAME.mdにメモしながら</li>
+<li>チュートリアル用のリポジトリは、<a href="https://github.com/ngwork0301/learnjs">Forkしたリポジトリ</a> をサブモジュールにしてすすめた。</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>スタディしたメモ等を残した親リポジトリは、書籍側の著作権を考慮して非公開にしています</p>
+</div>
+<h2 id="_5"><img alt="🍛" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f35b.svg" title=":curry:" /> 完成したもの</h2>
+<p><a href="http://learnjs.ngwork0301.com.s3-website-us-east-1.amazonaws.com/">http://learnjs.ngwork0301.com.s3-website-us-east-1.amazonaws.com/</a>
+* 書籍の写経のとおりつくったもの。JavaScriptのスタディを想定して、コードをフォームに入力して、答え合わせをするアプリ</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Google認証して、解答を保存できる機能がありますが、本当のWebサービスではないので、現状はテスト用の一部の指定アカウントに制限してあります。</p>
+</div>
+<h2 id="_6"><img alt="😄" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f604.svg" title=":smile:" /> ざっくりと理解したこと</h2>
+<ul>
+<li>まずハリボテのWebページをAmazon S3にいれてしまえば、それだけでサービスができあがる。先にデプロイしてしまって、肉付けしながら開発するのがモダンな開発手法。今回は、著者が用意したAWS SDK/CLIをつかった簡単なスクリプト(sspa)ですぐにデプロイできた。</li>
+<li>ルーティングもすべてクライアント側JSで書ける。つまり最初のリクエストでプログラムの動作のほとんどをブラウザにロードさせる。</li>
+<li>一部のサーバサイドの処理が必要な部分ももちろんあるが、従来のようなサーバサイドのプログラムを用意する必要はない。<ul>
+<li>認証処理は、この例ではAWS CognitoからGoogle認証させる方法でおこなえる。クライアントサイドからの呼び出しと設定だけでセキュアに使える。</li>
+<li>DB関連の処理は、DynamoDBとAWSの機能をつかって、こちらもクライアントサイドからのクエリ実行と設定だけでセキュアに使える。</li>
+<li>Lambdaをつかって、フロントだけではできない処理はマイクロサービスとして呼び出せる。たとえば今回の例では統計情報を集める処理で使用した。</li>
+</ul>
+</li>
+<li>セキュリティの観点では、むしろ自前でサーバプログラムをつくらないでことでAWSのしくみ乗っかって守ってもらうような印象。ただしセキュリティ対策は従来どおり必要なので、各観点でAWSを使う場合にどう対策する/してあるのか調べて必要な部分を適用すること。</li>
+<li>AWS CloudWatchでログをとって、統計情報(書籍ではシェル芸でとった)をみて、スケールアップの有無をチェック。料金体系とのバランスで各制限を変更。とくに一番最初にひっかかりそうなのはDynamoDB周りの読み書きのスレッショルド。とはいえ、かなりのことが無料の範囲でできる。</li>
+</ul>
+<h2 id="_7"><img alt="😂" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f602.svg" title=":joy:" /> ハマったところ</h2>
+<h3 id="cognitogoogle">Cognito/Google認証がなかなかうまくいかなかった。</h3>
+<ul>
+<li>結局写経したときの3箇所のスペルミスによって発生していた。</li>
+<li>一旦写経やめて模範解答のソースにいれかえてもうまく動作していなかったので、クライアントサイドではないと思い込んでいた。JSだけでなくhtmlにもミスがあって複合的な現象になっていた。</li>
+<li>デバッグのやり方のコツをつかむ必要がある。今回はAWS SDKをつかっているVendor.jsがMinifyされているため、クライアント側もデバッグしづらかったのと、サーバサイドはクラウドの雲に潜って掘り出す感覚。認証についてのクラウド側の設定に問題はなさそうということがわかるまで時間を要した。</li>
+<li>ハマったおかけで、AWS Webコンソールの見方とaws cliの使い方の理解が深まった(笑)。</li>
+<li>JavasSriptというか関数側言語のデバッグのコツをつかむ必要があった。Java/Pythonのデバッグではスタックトレースをベースにみるが、JSではどこから呼ばれてどこにいくのかわかりにくかった。</li>
+<li>ESLintをいれてあったのでスペルミスなどは安心していた。ちゃんとチェックされていたのだろうか。VSCodeの設定がまずかった？JSの開発環境まわりはもう少しちゃんとスタディしておいたほうがよさそう。</li>
+</ul>
+<h3 id="amazon-api-gatewaylambda">Amazon API GatewayをつかったLambda関数の呼び出しが何度やってもコケる。</h3>
+<ul>
+<li>Amazon API Gatewayは書籍を執筆したころからだいぶ変わってしまった様子</li>
+<li>CloudWatchをAWSのヘルプから先にスタディするなどして、クラウド側のログを強化して対策した。</li>
+<li>結論、POSTリクエストでの引数の引き渡しがうまくいってなかった。</li>
+<li>「マッピングテンプレート」というのを編集して、対象の引数problemNumberがルート要素として、Lambda側に渡るように設定したら解決した。Lambda側で受け取るリクエストの中身が、入れ子になっていた様子。掘り出してとってくるようにLambda側で直しても良いが、AWS SDKからの呼び出しとどちらもつかえるようにするには、リクエストの中身をいじる必要があった。</li>
+</ul>
+<h2 id="_8"><img alt="🎉" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f389.svg" title=":tada:" /> 感想</h2>
+<ul>
+<li>簡単にクラウドベースのWebアプリがつくれたのはよかった。つらいAWSの料金体系とかセキュリティとかを軽く理解しつつ、あまり意識せずにこれができるのはやはりうれしい。</li>
+<li>SPAはいわゆるPoC(Proof of Concept)のような形でソフトウェアの試作を素早く作成するのに向いている印象。ある程度市場の手応えをえた段階でも、AWSの設定でスケールアップもできるので、しばらくはつかってもらえるレベルのものはつくれる印象。前に会社でソフトウェアの試作大会のようなことをする機会があったが、そのときに知りたかった感。</li>
+<li>とはいえ、上記でめっちゃハマってたので、自分には初回では爆速では作れなかった。２回、３回目とつくっていけば、開発速度はかなり上がるはず。</li>
+<li>本書も基本TDDで進められている。<a href="2021/test-driven-development-study">テスト駆動開発</a> の読書後のスタディだったので、テスト駆動開発自体の理解をさらに深めることができたのはよかった。たとえばEtoEのテストばかり書かずに細かい粒度で網羅的に書くことの重要性＝FIREなテストスイートなど。</li>
+<li>ハマったときはなかなか進まずツラかった。自分がこれまでやってきた開発のようにサーバサイドのログはとれず、ブラウザに帰ってきたレスポンスで調査を始める必要があり、デバッグのコツがつかめなかった。しかもAWS用語が多すぎる。スタディに時間がかかって、AWS固有のノウハウはスタディのモチベーションがあがらない部分も少なからずあった。</li>
+</ul>
+<h3 id="_9"><img alt="😔" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f614.svg" title=":pensive:" /> よくなかったところ(本を選ぶ上での反省点)</h3>
+<ul>
+<li>書籍が古いので、内容もすこし古い。古すぎて差し支えるということはなかったが、とくにAWS API Gatewayの使い方などはだいぶ差が出ていた。もう他にこの時期に読み進めているひと(Forkしている人)は今はいない感があった。</li>
+<li>typoのプルリクを出したけど、著者のBen Radyさんももうこのリポジトリをメンテンスしていないのか、マージされず。初めてのプルリクなのでやり方がよくなかったか？簡単すぎる内容なのでissueを切っていないのがよくなかった？</li>
+<li>jQueryである。サーバレスシングルページアプリケーションを学ぶのであれば、モダンなフレームワークをつかっているほうがよさそう。「<a href="https://oukayuka.booth.pm/items/1572683">りあクト</a>」という書籍でFirebase + React.jsベースでのSPA作成が紹介されているのをあとから知って、そちらを読めばよかった感がある。</li>
+<li>とはいえ、自分にはjQueryに多少なりとも親しみがあったのと、軽くEC2以外のAWSの感触が学べたのでこれはこれでよかった。</li>
+</ul>
+<h2 id="_10"><img alt="🔭" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f52d.svg" title=":telescope:" /> 今後の展望など</h2>
+<ul>
+<li>これを中心に、社内の試作・提案、個人開発などでつかってみて、試作をサクッとつくれる基盤を整えることができたらよいなぁという希望</li>
+<li>世の中のどのくらいのSaasがSPAになっているのか気になるので、調査してみたい。ロードされたJSをみてみたり、Wappalyzerで使われている技術を分析してみたりしてみれば、ある程度のことはわかりそう。</li>
+<li>JSフレームワークも仕事でつかっていないので、ちゃんとはスタディしていない。Vue.jsを少しみたくらい。最近復権しているReact.jsをちゃんと学んでみるか。</li>
 </ul>
                 
                   
@@ -427,7 +667,7 @@
 <div class="md-source-date">
   <small>
     
-      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2021年5月29日</span>
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2021年8月22日</span>
       
     
   </small>
@@ -451,7 +691,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="フッター">
       
-        <a href="../mkdocs-blog/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../python-debug-gdb/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -460,19 +700,19 @@
               <span class="md-footer__direction">
                 前
               </span>
-              MkDocsブログ@GitHub Pages構築
+              gdbでpythonをデバッグ
             </div>
           </div>
         </a>
       
       
-        <a href="../serverless-single-page-application/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../test-driven-development-study/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 次
               </span>
-              [読書]サーバレスシングルページアプリケーション
+              [読書]テスト駆動開発
             </div>
           </div>
           <div class="md-footer__button md-icon">
