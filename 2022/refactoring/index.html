@@ -1,0 +1,1566 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="このサイトはNGWのブログです。このブログで述べられている内容はすべて私の個人的な意見に基づくものです。誤記やご意見等はGithub issueまたはtwitterへご連絡ください。">
+      
+      
+      
+        <meta name="author" content="NGW">
+      
+      
+        <link rel="canonical" href="https://ngwork0301.github.io/2022/refactoring/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>[読書] リファクタリング(第2版) - NGW's weblog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjp.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:600,800">
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-197500322-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="RSS feed of created content" href="https://ngwork0301.github.io/feed_rss_created.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="https://ngwork0301.github.io/feed_rss_updated.xml">
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="black">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="../.." title="NGW&#39;s weblog" class="md-header__button md-logo" aria-label="NGW's weblog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGW's weblog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              [読書] リファクタリング(第2版)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="クリア" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGW&#39;s weblog" class="md-nav__button md-logo" aria-label="NGW's weblog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    NGW's weblog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        最新記事
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/devsumi2021summer-minodriven/" class="md-nav__link">
+        Deverlopers Summit 2021 Summer [C-9] 感想
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/invitation-to-engineering-organization-theory/" class="md-nav__link">
+        [読書] エンジニアリング組織論への招待
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/mkdocs-blog/" class="md-nav__link">
+        MkDocsブログ@GitHub Pages構築
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/python-debug-gdb/" class="md-nav__link">
+        gdbでpythonをデバッグ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/serverless-single-page-application/" class="md-nav__link">
+        [読書]サーバレスシングルページアプリケーション
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/test-driven-development-study/" class="md-nav__link">
+        [読書]テスト駆動開発
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/the_story_of_how_i_came_to_output/" class="md-nav__link">
+        子供ができて将来の不安からアウトプットをするようになった話
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/zero-osdev-0_10/" class="md-nav__link">
+        [読書] ゼロからのOS自作入門(前編)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2022" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how_to_win_frireds_and_influence_people/" class="md-nav__link">
+        [読書] 人を動かす
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobs_to_be_Done_jobs_theory/" class="md-nav__link">
+        [読書] ジョブ理論
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          [読書] リファクタリング(第2版)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        [読書] リファクタリング(第2版)
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    読んだ本
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    モチベーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    かかった時間など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    開発環境、進め方など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    書いてあることの要約
+  </a>
+  
+    <nav class="md-nav" aria-label="書いてあることの要約">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    コードの不吉な臭い(第3章)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612" class="md-nav__link">
+    リファクタリングのカタログ(第6章〜12章)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    ハマったところ
+  </a>
+  
+    <nav class="md-nav" aria-label="ハマったところ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jestvscode" class="md-nav__link">
+    Jestで書いたテストコードをVSCodeのデバッガで止めようとしたがスルーされる
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jestmock" class="md-nav__link">
+    JestのMockを使おうとしてスタディに時間がかかった
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    感想
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    今後の展望など
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zero-osdev-11_21/" class="md-nav__link">
+        [読書] ゼロからのOS自作入門(中編)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../zero-osdev-22_31/" class="md-nav__link">
+        [読書] ゼロからのOS自作入門(後編)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    読んだ本
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    モチベーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    かかった時間など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    開発環境、進め方など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    書いてあることの要約
+  </a>
+  
+    <nav class="md-nav" aria-label="書いてあることの要約">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    コードの不吉な臭い(第3章)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612" class="md-nav__link">
+    リファクタリングのカタログ(第6章〜12章)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    ハマったところ
+  </a>
+  
+    <nav class="md-nav" aria-label="ハマったところ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jestvscode" class="md-nav__link">
+    Jestで書いたテストコードをVSCodeのデバッガで止めようとしたがスルーされる
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jestmock" class="md-nav__link">
+    JestのMockを使おうとしてスタディに時間がかかった
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    感想
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    今後の展望など
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="2">[読書] リファクタリング(第2版)</h1>
+<p><code>#リファクタリング</code> <code>#マーティン・ファウラー</code> <code>#Martin Fowler</code> <code>#tdd</code></p>
+<h2 id="_1"><img alt="📕" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4d5.svg" title=":closed_book:" /> 読んだ本</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884">リファクタリング(第2版): 既存のコードを安全に改善する (OBJECT TECHNOLOGY SERIES) Martin Fowler 著、児玉 公信 訳、友野 晶夫 訳、平澤 章 訳、梅澤 真史 訳</a></td>
+<td align="center"><img alt="" src="https://www.ohmsha.co.jp/Portals/0/book/large/978-4-274-22454-6.jpg" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2"><img alt="💪" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4aa.svg" title=":muscle:" /> モチベーション</h2>
+<ul>
+<li>今年出版された『<a href="https://gihyo.jp/book/2022/978-4-297-12783-1">良いコード悪いコードで学ぶ設計入門</a>』の執筆で有名な <a href="https://twitter.com/MinoDriven">ミノ駆動@MinoDiven</a>さんが、最初に衝撃をうけた書籍として紹介されていました。（その頃は初版だったとのことですが）</li>
+<li>調べてみると、すでに読了した『<a href="https://shop.ohmsha.co.jp/shopdetail/000000004967/">テスト駆動開発</a>』（感想記事は<a href="(../2021/test-driven-development-study)">こちら</a>）の次に読むべき本として、いろいろなところで紹介されており、良書としてエンジニア界隈ではかなり多くの人に読まれている印象でした。</li>
+<li>今後ドメイン駆動設計をスタディする前段階としても、スタディするのはマストという理解をしました。</li>
+</ul>
+<h2 id="_3"><img alt="🕐" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f550.svg" title=":clock1:" /> かかった時間など</h2>
+<ul>
+<li>期間：2022/5/16 〜 2022/8/22</li>
+<li>読書時間：109時間</li>
+<li>おそらくこの本を読んだ他の人の平均よりもかなり多くかかっていると思います。</li>
+<li>リファクタリングとテストは対になるという教えに則って、書籍には書かれていないテストケースやテスト用入力データなどを補いながら実施しました。</li>
+</ul>
+<h2 id="_4"><img alt="💻" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4bb.svg" title=":computer:" /> 開発環境、進め方など</h2>
+<ul>
+<li>M1 MacにHomebrewでnodenvを入れて、Node 18.1.0をインストール</li>
+<li>VSCodeに、ESlint、Jest、Jest Snippets拡張を追加して、JavaSciptのデバッグ環境を整備</li>
+<li>テストフレームワークは、書籍では第４章でMochaが紹介されていたのですが、第1章のサンプルをやり始めるときにすでにJestを選択してしまったのでそれを使いました。実際はどれでもよさそう。</li>
+<li>テストコードは、twadaさん謹製の<a href="https://github.com/power-assert-js/power-assert">power-assert</a>を使用して実装</li>
+<li>書籍にかかれているコードは、GitHubにプライベートリポジトリとして作成</li>
+</ul>
+<h2 id="_5"><img alt="🔍" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f50d.svg" title=":mag:" /> 書いてあることの要約</h2>
+<ul>
+<li>第1章.リファクタリング 最初の例<ul>
+<li>リファクタリングの流れを理解してもらうために最初にサンプルを用意</li>
+<li>あるプログラムに機能追加をするケースで考える。</li>
+<li>機能を加えにくいプログラムへの新機能追加は、まず機能追加が簡単になるようにリファクタリングしてから追加する</li>
+<li>リファクタリングをやるということは、対象となるコードにテスト群を作り上げること。リファクタリングにより新たなバグをつくりださ  ないためにテストは必須</li>
+<li>名前の付け方は、効果的だが、難しい。<strong>そのとき適切な名前をつけることは難しいので、最初適当な名前をつけて、あとから積極的に名前を変更する</strong></li>
+<li>できるだけ細かくステップを踏むようにする。リファクタリング途中でテストが通らなくなったときに、調査に時間をかけなくて済むこと  で開発のスピードをあげることができる。</li>
+<li>キャンプ場のルール＝コードベースは最初にみたときよりもきれいに保つ</li>
+</ul>
+</li>
+<li>第２章.リファクタリングの原則<ul>
+<li>リファクタリングとは<ul>
+<li>外部からみたときの振る舞いを保ちつつ、理解や修正が簡単になるように、ソフトウェアの内部構造を変化させること</li>
+<li>リファクタリングは、振る舞いを保ちつつ、小さなステップを適用していくことであり、ステップを積み重ねて行くことで大きな変化をもたらしていくもの</li>
+<li>小さなステップでやるのが非効率に思えるかもしれないが、これにより各要素の秩序がもたらされて、デバッグに費やす時間が圧倒的に減る</li>
+<li>「外部から見た振る舞い」というのは意図的にあいまいな定義にしている。実行速度、モジュール間のインタフェースが変わったり、微妙な変化はある。</li>
+<li>リファクタリング中に見つけた潜在バグは、そのままその振る舞いのまま残すべきで、別なコミットとして直す。</li>
+</ul>
+</li>
+<li>二つの帽子<ul>
+<li>「機能追加」と「リファクタリング」を明確に区別する</li>
+<li>「リファクタリング」は、機能追加をしない＝テストケースは追加しない。</li>
+<li>テストケースがグリーンなのを保ったまま、小さなステップで改善していく</li>
+</ul>
+</li>
+<li>リファクタリングのメリット<ul>
+<li>ソフトウェア設計を改善する<ul>
+<li>リファクタリングしないと、プログラムの内部の設計／アーキテクチャは徐々に劣化していく</li>
+<li>短期的な目的実現のため全体的な設計を理解せずに変更していくと、構造が失われていく</li>
+<li>設計とリファクタリングがちゃんとしていないと認知負荷が上がり、正しく修正するのが難しくなる</li>
+</ul>
+</li>
+<li>ソフトウェアを理解しやすくする<ul>
+<li>プログラミングは機械との対話に思えるが、他の利用者がいることを忘れてはならない。</li>
+<li>他の利用者がコードを読むことを想定するのは軽視されがちだが、実はもっとも重要</li>
+<li>少しの時間をリファクタリングに当てるだけでコードの目的を明確に表現でき、より伝わるようになる。</li>
+<li>他の利用者は、未来の自分でもある。いちいちどうやってつくったのかを覚えている必要がなくなる。</li>
+</ul>
+</li>
+<li>バグの発見を助ける<ul>
+<li>リファクタリングをすることでコードが何をしているのか確証を得ながらバグを発見できるようになる</li>
+</ul>
+</li>
+<li>プログラミングを速める<ul>
+<li>リファクタリングは、コードの品質が上がることは納得してもらえるが、スピードが上がることは納得してもらいづらい。</li>
+<li>だんだんと新機能をいれるのに時間がかかるようになることがあるが、既存のコードベースにどうやって適合させるかを把握するのに、費やす時間が徐々に増えていくから。</li>
+<li>内部の設計が優れているソフトウェアは、新機能を加えるときにどのように変更すればよいかすぐに把握できるので開発が早くなる＝「デザインスタミナ仮説」</li>
+<li>これまでは、優れた設計をするには、プログラミングの前に設計ができていないといけないと考えられてきた。</li>
+<li>現在は、優れた設計を前もって完了しておくことは難しいので、素早く機能を追加しつづけるためにリファクタリングが不可欠</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>いつリファクタリングするか<ul>
+<li>機能追加の準備のためのリファクタリング</li>
+<li>理解のためのリファクタリング</li>
+<li>ゴミ拾いのためのリファクタリング</li>
+<li>計画されたリファクタリングと、機に応じたリファクタリング</li>
+<li>長期のリファクタリング</li>
+<li>コードレビュー時のリファクタリング</li>
+</ul>
+</li>
+<li>リファクタリングをさけるとき<ul>
+<li>常にリファクタリングをすべきという風に思えたかもしれないが、混沌で汚いコードも修正の必要がなければ放っておいて良い。</li>
+</ul>
+</li>
+<li>リファクタリングとアーキテクチャ、そしてYagni<ul>
+<li>現在わかっている要求のみを解決するソフトウェアをまず構築するのが良い。</li>
+<li>ユーザの要求の変化に合わせてリファクタリングをつかってアーキテクチャを新たな要求に適合させていく。</li>
+<li>パラメータ化するかどうかを採択するとき異なるパラメータを渡す場合があるのか証明する必要がある。</li>
+<li>そうでない場合はパラメータ化は複雑性を入れ込むのでやらない＝Yagni(You argn't going to need it.)</li>
+<li>Yagniは、アーキテクチャの検討が消滅するわけではない。従来とは少し違ったやり方でアーキテクチャと設計を開発プロセスに織り込んでいく方法がYagniであり、リファクタリングと一緒にすすめる</li>
+</ul>
+</li>
+<li>リファクタリングとソフトウェア開発プロセス<ul>
+<li>XP(エクストリーム・プログラミング)では、リファクタリングを早期からプラクティスとして採用している</li>
+<li>アジャイル開発は浸透したものの、本当のアジャイルには、リファクタリングが必要。</li>
+<li>チーム内でリファクタリングをするときは、各メンバーが他のメンバーの作業と干渉することなく、必要に応じていつでもリファクタリングできることが重要</li>
+<li>開発手法を構成する３つのプラクティス。Yagniを適用するには以下が必要<ul>
+<li>自己テスト</li>
+<li>リファクタリング</li>
+<li>CI</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>リファクタリングとパフォーマンス<ul>
+<li>リファクタリングのソフトウェアを理解しやすくする変更は実行速度を落としてしまう。</li>
+<li>ただし、パフォーマンスチューニングの基本は、チューニングしやすく作ってから段階的にチューニングすること</li>
+<li>常に開発中にパフォーマンスを意識することは、よく行われてきたことだが、大抵ソースがわかりにくくなる</li>
+<li><strong>90%の法則</strong><ul>
+<li>ごく一部の処理で集中的にリソースが消費されていることがほとんど</li>
+<li>全体で均一的にパフォーマンスチューニングをしてもその90%が無駄になる</li>
+</ul>
+</li>
+<li>パフォーマンスチューニングするまえにリファクタリングをおこなって、プロファイラを埋め込めるようにしておく。</li>
+<li>パフォーマンス改善・調査は、小さな変更を入れるたびにパフォーマンステストをやり直すことが重要</li>
+<li>最適化の段階でチューニングを行いやすくするのが大事</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第4章.テストの構築<ul>
+<li>プログラマは、実際プログラムを書いている時間は圧倒的に短く、そのうち特にデバッグしている時間が長い</li>
+</ul>
+</li>
+<li>第5章.カタログの紹介<ul>
+<li>効率よくリファクタリングをする方法としてファウラー氏が個人的なメモとして作ったものがベースになっている。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3">コードの不吉な臭い(第3章)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>日本語名</th>
+<th>英語名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>不可思議な名前</td>
+<td>Mysterious Name</td>
+</tr>
+<tr>
+<td>2</td>
+<td>重複したコード</td>
+<td>Duplicated Code</td>
+</tr>
+<tr>
+<td>3</td>
+<td>長い関数</td>
+<td>Long Function</td>
+</tr>
+<tr>
+<td>4</td>
+<td>長いパラメータリスト</td>
+<td>Long Parameter List</td>
+</tr>
+<tr>
+<td>5</td>
+<td>グローバルなデータ</td>
+<td>Global Data</td>
+</tr>
+<tr>
+<td>6</td>
+<td>変更可能なデータ</td>
+<td>Mutable Data</td>
+</tr>
+<tr>
+<td>7</td>
+<td>変更の偏り</td>
+<td>Divergent Change</td>
+</tr>
+<tr>
+<td>8</td>
+<td>変更の分散</td>
+<td>Shotgun Surgery</td>
+</tr>
+<tr>
+<td>9</td>
+<td>特性の横恋慕</td>
+<td>Feature Envy</td>
+</tr>
+<tr>
+<td>10</td>
+<td>データの群れ</td>
+<td>Data Clumps</td>
+</tr>
+<tr>
+<td>11</td>
+<td>基本データ型への執着</td>
+<td>Primitive Obsession</td>
+</tr>
+<tr>
+<td>12</td>
+<td>重複したスイッチ文</td>
+<td>Repeated Switches</td>
+</tr>
+<tr>
+<td>13</td>
+<td>ループ</td>
+<td>Loops</td>
+</tr>
+<tr>
+<td>14</td>
+<td>怠け者の要素</td>
+<td>Lazy Element</td>
+</tr>
+<tr>
+<td>15</td>
+<td>疑わしき一般化</td>
+<td>Speculative Generality</td>
+</tr>
+<tr>
+<td>16</td>
+<td>一時的属性</td>
+<td>Temporary Field</td>
+</tr>
+<tr>
+<td>17</td>
+<td>メッセージの連鎖</td>
+<td>Message Chains</td>
+</tr>
+<tr>
+<td>18</td>
+<td>仲介人</td>
+<td>Middle Man</td>
+</tr>
+<tr>
+<td>19</td>
+<td>インサイダー取引</td>
+<td>Insider Trading</td>
+</tr>
+<tr>
+<td>20</td>
+<td>巨大なクラス</td>
+<td>Large Class</td>
+</tr>
+<tr>
+<td>21</td>
+<td>クラスのインタフェース不一致</td>
+<td>Alternative Classes with Different Interfaces</td>
+</tr>
+<tr>
+<td>22</td>
+<td>データクラス</td>
+<td>Data Class</td>
+</tr>
+<tr>
+<td>23</td>
+<td>相続拒否</td>
+<td>Refused Bequest</td>
+</tr>
+<tr>
+<td>24</td>
+<td>コメント</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="612">リファクタリングのカタログ(第6章〜12章)</h3>
+<table>
+<thead>
+<tr>
+<th>項番</th>
+<th>日本語名</th>
+<th>英語名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td>関数の抽出</td>
+<td>Extract Function</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>関数のインライン化</td>
+<td>Inline Function</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>変数の抽出</td>
+<td>Extract Variable</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>変数のインライン化</td>
+<td>Inline Variable</td>
+</tr>
+<tr>
+<td>6.5</td>
+<td>関数宣言の変更</td>
+<td>Change Function Declaration</td>
+</tr>
+<tr>
+<td>6.6</td>
+<td>変数のカプセル化</td>
+<td>Encapsulate Variable</td>
+</tr>
+<tr>
+<td>6.7</td>
+<td>変数名の変更</td>
+<td>Rename Variable</td>
+</tr>
+<tr>
+<td>6.8</td>
+<td>パラメータオブジェクトの導入</td>
+<td>Introduce Parameter Object</td>
+</tr>
+<tr>
+<td>6.9</td>
+<td>関数群のクラスへの集約</td>
+<td>Combine Functions into Class</td>
+</tr>
+<tr>
+<td>6.10</td>
+<td>関数群の変換への集約</td>
+<td>Combine Functions into Transform</td>
+</tr>
+<tr>
+<td>6.11</td>
+<td>フェーズの分離</td>
+<td>Split phase</td>
+</tr>
+<tr>
+<td>7.1</td>
+<td>レコードのカプセル化</td>
+<td>Encapsulate Record</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>コレクションのカプセル化</td>
+<td>Encapsulate Collection</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>オブジェクトによりプリミティブの置き換え</td>
+<td>Replace Primitive with Object</td>
+</tr>
+<tr>
+<td>7.4</td>
+<td>問い合わせによる一時変数の置き換え</td>
+<td>Replace Temp with Query</td>
+</tr>
+<tr>
+<td>7.5</td>
+<td>クラスの抽出</td>
+<td>Extract Class</td>
+</tr>
+<tr>
+<td>7.6</td>
+<td>クラスのインライン化</td>
+<td>Inline Class</td>
+</tr>
+<tr>
+<td>7.7</td>
+<td>委譲の隠蔽</td>
+<td>Hide Delegate</td>
+</tr>
+<tr>
+<td>7.8</td>
+<td>仲介人の除去</td>
+<td>Remove Middle Man</td>
+</tr>
+<tr>
+<td>7.9</td>
+<td>アルゴリズムの置き換え</td>
+<td>Substitute Algorithm</td>
+</tr>
+<tr>
+<td>8.1</td>
+<td>関数の移動</td>
+<td>Move Function</td>
+</tr>
+<tr>
+<td>8.2</td>
+<td>フィールドの移動</td>
+<td>Move Field</td>
+</tr>
+<tr>
+<td>8.3</td>
+<td>ステートメントの関数内への移動</td>
+<td>Move Statements into Function</td>
+</tr>
+<tr>
+<td>8.4</td>
+<td>ステートメントの呼び出し側への移動</td>
+<td>Move Statements into Callers</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td>関数呼び出しによるインラインコードの置き換え</td>
+<td>Replace Inline Code with Function Call</td>
+</tr>
+<tr>
+<td>8.6</td>
+<td>ステートメントのスライド</td>
+<td>Slide Statements</td>
+</tr>
+<tr>
+<td>8.7</td>
+<td>ループの分離</td>
+<td>Split Loop</td>
+</tr>
+<tr>
+<td>8.8</td>
+<td>パイプラインによるループの置き換え</td>
+<td>Replace Loop with Pipline</td>
+</tr>
+<tr>
+<td>8.9</td>
+<td>デッドコードの削除</td>
+<td>Remove Dead Code</td>
+</tr>
+<tr>
+<td>9.1</td>
+<td>変数の分離</td>
+<td>Split Variable</td>
+</tr>
+<tr>
+<td>9.2</td>
+<td>フィールド名の変更</td>
+<td>Rename Field</td>
+</tr>
+<tr>
+<td>9.3</td>
+<td>問い合わせによる導出変数の置き換え</td>
+<td>Replace Derived Variable with Query</td>
+</tr>
+<tr>
+<td>9.4</td>
+<td>参照から値への変更</td>
+<td>Change Reference to Value</td>
+</tr>
+<tr>
+<td>9.5</td>
+<td>値から参照への変更</td>
+<td>Change Value to Reference</td>
+</tr>
+<tr>
+<td>10.1</td>
+<td>条件記述の分解</td>
+<td>Decompose Conditional</td>
+</tr>
+<tr>
+<td>10.2</td>
+<td>条件記述の統合</td>
+<td>Consolidate Conditional Expression</td>
+</tr>
+<tr>
+<td>10.3</td>
+<td>ガード説による入れ子の条件記述の置き換え</td>
+<td>Replace Nested Conditional with Guard Clauses</td>
+</tr>
+<tr>
+<td>10.4</td>
+<td>ポリモーフィズムによる条件記述の置き換え</td>
+<td>Replace Conditinal with Polymorphism</td>
+</tr>
+<tr>
+<td>10.5</td>
+<td>特殊ケースの導入</td>
+<td>Introduce Special Case</td>
+</tr>
+<tr>
+<td>10.6</td>
+<td>アサーションの導入</td>
+<td>Introduce Assertion</td>
+</tr>
+<tr>
+<td>11.1</td>
+<td>問い合わせと更新の分離</td>
+<td>Separate Query from Modifier</td>
+</tr>
+<tr>
+<td>11.2</td>
+<td>パラメータによる関数の統合</td>
+<td>Parameterize Function</td>
+</tr>
+<tr>
+<td>11.3</td>
+<td>フラグパラメータの削除</td>
+<td>Remove Flag Argument</td>
+</tr>
+<tr>
+<td>11.4</td>
+<td>オブジェクトそのものの受け渡し</td>
+<td>Preserve Whole Object</td>
+</tr>
+<tr>
+<td>11.5</td>
+<td>問い合わせによるパラメータの置き換え</td>
+<td>Replace Parameter with Query</td>
+</tr>
+<tr>
+<td>11.6</td>
+<td>パラメータによる問い合わせの置き換え</td>
+<td>Replace Query with Parameter</td>
+</tr>
+<tr>
+<td>11.7</td>
+<td>setterの削除</td>
+<td>Remove Setting Method</td>
+</tr>
+<tr>
+<td>11.8</td>
+<td>ファクトリ関数によるコンストラクタの置き換え</td>
+<td>Replace Constructor with Factory Function</td>
+</tr>
+<tr>
+<td>11.9</td>
+<td>コマンドによる関数の置き換え</td>
+<td>Replace Function with Command</td>
+</tr>
+<tr>
+<td>11.10</td>
+<td>関数によるコマンドの置き換え</td>
+<td>Replace Command with Function</td>
+</tr>
+<tr>
+<td>12.1</td>
+<td>メソッドの引き上げ</td>
+<td>Pull Up Method</td>
+</tr>
+<tr>
+<td>12.2</td>
+<td>フィールドの引き上げ</td>
+<td>Pull Up Field</td>
+</tr>
+<tr>
+<td>12.3</td>
+<td>コンストラクタ本体の引き上げ</td>
+<td>Pull Up Constructor Body</td>
+</tr>
+<tr>
+<td>12.4</td>
+<td>メソッドの押し下げ</td>
+<td>Push Down Method</td>
+</tr>
+<tr>
+<td>12.5</td>
+<td>フィールドの押し下げ</td>
+<td>Push Down Field</td>
+</tr>
+<tr>
+<td>12.6</td>
+<td>サブクラスによるタイプコードの置き換え</td>
+<td>Replace Type Code with Subclasses</td>
+</tr>
+<tr>
+<td>12.7</td>
+<td>サブクラスの削除</td>
+<td>Remove Subclass</td>
+</tr>
+<tr>
+<td>12.8</td>
+<td>スーパークラスの抽出</td>
+<td>Extract Superclass</td>
+</tr>
+<tr>
+<td>12.9</td>
+<td>クラス階層の平坦化</td>
+<td>Collapse Hierarchy</td>
+</tr>
+<tr>
+<td>12.10</td>
+<td>委譲によるサブクラスの置き換え</td>
+<td>Replace Subclass with Delegate</td>
+</tr>
+<tr>
+<td>12.11</td>
+<td>委譲によるスーパークラスの置き換え</td>
+<td>Replace Superclass with Delegate</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6"><img alt="😂" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f602.svg" title=":joy:" /> ハマったところ</h2>
+<h3 id="jestvscode">Jestで書いたテストコードをVSCodeのデバッガで止めようとしたがスルーされる</h3>
+<ul>
+<li>第一章の例題の最初の開発環境構築でハマりました。</li>
+<li>そもそもBebelについてもなにも知らなくて、当時のCommonJSとECMAScript6の違いとかいろいろJSの歴史を紐解くことに。</li>
+<li>node実行時に<code>--inspect</code>を渡すことでブレークポイントで止められるようになったのですが、これをVSCode拡張のJest実行で渡す方法がわからずハマりました。</li>
+<li>結局、コマンドから実行したら止められるので、なにか動きがおかしくてデバッガで止めたいときはそれで対処しました。JSよわよわなのがバレました。</li>
+</ul>
+<h3 id="jestmock">JestのMockを使おうとしてスタディに時間がかかった</h3>
+<ul>
+<li>8.4節「ステートメントの呼び出し側への移動」のサンプルコードに対応するテストケースを実装していたときの話</li>
+<li>〜の処理でサンプルコードをそのままにしてテストできるようにするには、Mockを用意しないと実現できそうになさそうだったので、スタディがてら挑戦してみました。</li>
+<li>調べてみて、〜あたりを参考にさせていただきました（多謝）。</li>
+<li>ファイル読み込みが絡んだテストで非同期実行になってしまい、うまく動作しませんでした。</li>
+<li>浅くJSの同期非同期の動作は理解していたつもりだったのですが、この際ちゃんと理解しようかと<a href="https://zenn.dev/estra/books/js-async-promise-chain-event-loop">パダワンさんのZenn本：イベントループとプロミスチェーンで学ぶJavaScriptの非同期処理</a>を参照するに至るなどしました。</li>
+</ul>
+<h2 id="_7"><img alt="🎉" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f389.svg" title=":tada:" /> 感想</h2>
+<ul>
+<li><strong>第2章にめちゃくちゃいいことが書かれている</strong>(※上記要約参照)<ul>
+<li>「そうだよな〜」と思いながらも考え方を変えることができました。</li>
+<li>Java界隈で有名なきしださんのHatenaブログで「<a href="https://nowokay.hatenablog.com/entry/2022/08/10/172015">リファクタリングはエンジニアの福利厚生であり管理指標への影響はほとんどないんでは</a>」という話もありますが、マーティン・ファウラーがリファクタリングのメリットを明言してくれるのは、心強いものではあります.</li>
+</ul>
+</li>
+<li>前評判のとおり、『<a href="https://shop.ohmsha.co.jp/shopdetail/000000004967/">テスト駆動開発</a>』とのつながりが強く、そちらの書籍にかかれていた「第31章リファクタリング」の解像度を高めた内容という理解です。<ul>
+<li>この辺はKent BeckとMartin Fowlerの共通認識が書籍としても反映されている印象を受けました。</li>
+</ul>
+</li>
+<li>「作りながら改善していく」という開発スタイルの良さ<ul>
+<li>実際の私の経験でも、コードを実際に書いた段階になって現れる問題はたくさんあり、「この問題は設計段階で考慮すべき」だったという反省の仕方をするのは多々ありました。</li>
+<li>ただし私のようにウォーターフォールを前提とした開発スタイルを新人のころに受けてきたエンジニアは、大体いつもこれだったので、<strong>「とはいえ設計段階でここまで考えるの無理だよな」という疑問に答えをくれた</strong>感じがしました。</li>
+</ul>
+</li>
+<li>「ほとんどの場合でパフォーマンスより、コードや構造がきれいになっていることのほうが優先される」という認識はかなり改められた<ul>
+<li>8.7節の「ループの分離」で、やっている処理の内容が違うので、分離してわざわざもう一度for文を回す処理を別に書くというリファクタリングは、「おいおい、マジかよ。さすがにこれは」と思いました。</li>
+<li>でも、だんだんとこの本をスタディしていくうちに、ファウラーの考えに染まってきて、「90%の法則」があるので、大量データを処理する箇所など明らかにパフォーマンスに影響することが予めわかっている場合を除き、<strong>無駄なところでパフォーマンスのことを重視して実装する必要はないのだ</strong>と考えが改まりました。これが現代の書き方なのだと。</li>
+</ul>
+</li>
+<li>現代のループの書き方は、変化した。<ul>
+<li>Pythonが中心の開発言語なので、できるだけfor文を自前で書かずに、内包表記をつかったり、numpyでの行列演算をつかうようにするなど考慮する文化は慣れていましたが、今はループは高階関数+ラムダ式で書くのがモダンなんですね。</li>
+<li>「ゼロからのOS自作入門」でつくったMikanOSの実装にもスマートポインタ&amp;ラムダ式でループさせるモダンな書き方が散りばめられていて、ちゃんと理解しなければと思っていたのですが、ここでスタディできたのはうれしかったです。</li>
+</ul>
+</li>
+<li>不吉な臭いとリファクタリングの間のギャップを感じた。<ul>
+<li>私の今の実力として、不吉な臭いを感じて、実際のリファクタリング手法を学んでも、どうなったらキレイなのかをイメージする力が弱いなと感じました。</li>
+<li>つまりそのギャップは設計・モデリングなのかなと。これが理解できないと、どういうものを理想形としてリファクタリングしていくのか見えない気がしました。</li>
+<li>GoFのデザインパターンが、書籍の中でもいくつか紹介されましたが、もう一度ちゃんと全パターンをさらっておこうと思いました。</li>
+<li>テスト駆動開発でもGoFのデザインパターン以外のパターンが紹介されていましたし、DDDで紹介されるパターンもあるようです。</li>
+</ul>
+</li>
+<li><a href="https://twitter.com/t_wada/status/904916106153828352?s=20&amp;t=rlsUQcrYqiduGdbhFAuhJw">twadaさんのツイート</a><ul>
+<li>書籍で紹介されている最後の不吉な臭いにコメント文があります。twadaさんのツイートで以下の指針が示されていて、大事なポイントなのかなと感じました。<blockquote>
+<p>コードには How<br />
+テストコードには What<br />
+コミットログには Why<br />
+コードコメントには Why not  </p>
+<p>を書こうという話をした</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="_8"><img alt="🔭" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f52d.svg" title=":telescope:" /> 今後の展望など</h2>
+<ul>
+<li>ここでスタディしたことを活かして、PyCharmなどIDEに備わったリファクタリング機能をもっと活用したいと思いました。<ul>
+<li>とくに「６章 リファクタリングはじめの一歩」にかかれているリファクタリングは、IDEをつかって自動でできるものが多いようです。</li>
+<li>他のリファクタリングをやる手順として、６章の基本的なリファクタリングをつかうことが多いので、活用できるとリファクタリング力が上がりそうだなと思いました。</li>
+</ul>
+</li>
+<li>考え方が変わったので、機能追加の実装とリファクタリングはセットになるのかなと。種類も多く、なんだっけとなりがちなので、リファクタリングをするたびにちょくちょく読み返したいと思いました。思い出したいときにObsidianとの連動をうまくやれておくとよいなと思いました。</li>
+<li>この書籍のコードがJavaScriptで書かれていたのは、非常にためになりましたしコーディングしていて楽しかったです。しかし、JavaScript周りはかなり置いてかれているので、もっとスタディしないといけないなと自覚しました。</li>
+<li>感想のとおり、設計・モデリングのところの理解を深めたいということで、デザインパターンやDDDをスタディしていこうと思います。</li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 1, 2022</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="フッター">
+      
+        
+        <a href="../jobs_to_be_Done_jobs_theory/" class="md-footer__link md-footer__link--prev" aria-label="前: [読書] ジョブ理論" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                前
+              </span>
+              [読書] ジョブ理論
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../zero-osdev-11_21/" class="md-footer__link md-footer__link--next" aria-label="次: [読書] ゼロからのOS自作入門(中編)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                次
+              </span>
+              [読書] ゼロからのOS自作入門(中編)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/ngwork0301" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/ngwork0301" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://zenn.dev/ngw" target="_blank" rel="noopener" title="zenn.dev" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://ngwork0301.github.io/feed_rss_created.xml" target="_blank" rel="noopener" title="ngwork0301.github.io" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
