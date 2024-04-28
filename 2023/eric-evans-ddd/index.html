@@ -1,0 +1,1392 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="このサイトはNGWのブログです。このブログで述べられている内容はすべて私の個人的な意見に基づくものです。誤記やご意見等はGithub issueまたはtwitterへご連絡ください。">
+      
+      
+      
+        <meta name="author" content="NGW">
+      
+      
+        <link rel="canonical" href="https://ngwork0301.github.io/2023/eric-evans-ddd/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>[読書] エリック・エヴァンスのドメイン駆動設計 - NGW's weblog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjp.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:600,800">
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-197500322-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="RSS feed of created content" href="https://ngwork0301.github.io/feed_rss_created.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="https://ngwork0301.github.io/feed_rss_updated.xml">
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="black">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="../.." title="NGW&#39;s weblog" class="md-header__button md-logo" aria-label="NGW's weblog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGW's weblog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              [読書] エリック・エヴァンスのドメイン駆動設計
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="クリア" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGW&#39;s weblog" class="md-nav__button md-logo" aria-label="NGW's weblog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    NGW's weblog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        最新記事
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/devsumi2021summer-minodriven/" class="md-nav__link">
+        Deverlopers Summit 2021 Summer [C-9] 感想
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/invitation-to-engineering-organization-theory/" class="md-nav__link">
+        [読書] エンジニアリング組織論への招待
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/mkdocs-blog/" class="md-nav__link">
+        MkDocsブログ@GitHub Pages構築
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/python-debug-gdb/" class="md-nav__link">
+        gdbでpythonをデバッグ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/serverless-single-page-application/" class="md-nav__link">
+        [読書]サーバレスシングルページアプリケーション
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/test-driven-development-study/" class="md-nav__link">
+        [読書]テスト駆動開発
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/the_story_of_how_i_came_to_output/" class="md-nav__link">
+        子供ができて将来の不安からアウトプットをするようになった話
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2021/zero-osdev-0_10/" class="md-nav__link">
+        [読書] ゼロからのOS自作入門(前編)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2022" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/atomic_thinking/" class="md-nav__link">
+        [読書] アトミックシンキング
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/dairy_as_an_engineer_raising_a_child/" class="md-nav__link">
+        子育てエンジニアのひとりとして雑記
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/design_pattern_with_java/" class="md-nav__link">
+        [読書] Java言語で学ぶデザインパターン入門 第3版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/domain_driven_design_modeling_implementation_guide/" class="md-nav__link">
+        [読書] ドメイン駆動設計 モデリング／実装ガイド
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/how_to_win_frireds_and_influence_people/" class="md-nav__link">
+        [読書] 人を動かす
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/introduction_to_domain_driven_design/" class="md-nav__link">
+        [読書] ドメイン駆動設計入門 -ボトムアップでわかる！ドメイン駆動設計の基本-
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/jobs_to_be_Done_jobs_theory/" class="md-nav__link">
+        [読書] ジョブ理論
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/kaizen-journey/" class="md-nav__link">
+        [読書] カイゼン・ジャーニー
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/mba_critical_thinking/" class="md-nav__link">
+        [読書] MBAクリティカル・シンキング
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/principles_of_the_system_architecture/" class="md-nav__link">
+        [読書] 現場で役に立つシステム設計の原則
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/refactoring/" class="md-nav__link">
+        [読書] リファクタリング(第2版)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/zero-osdev-11_21/" class="md-nav__link">
+        [読書] ゼロからのOS自作入門(中編)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2022/zero-osdev-22_31/" class="md-nav__link">
+        [読書] ゼロからのOS自作入門(後編)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2023" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          [読書] エリック・エヴァンスのドメイン駆動設計
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        [読書] エリック・エヴァンスのドメイン駆動設計
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    読んだ本
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    モチベーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    かかった時間など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    理解メモ(復習)
+  </a>
+  
+    <nav class="md-nav" aria-label="理解メモ(復習)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第一部：ドメインモデルを機能させる
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    第二部：モデル駆動設計の構成要素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    第三部：より深い洞察へ向かうリファクタリング
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    第四部：戦略的設計
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    感想
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    今後の展望
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    読んだ本
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    モチベーション
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    かかった時間など
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    理解メモ(復習)
+  </a>
+  
+    <nav class="md-nav" aria-label="理解メモ(復習)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第一部：ドメインモデルを機能させる
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    第二部：モデル駆動設計の構成要素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    第三部：より深い洞察へ向かうリファクタリング
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    第四部：戦略的設計
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    感想
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    今後の展望
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="_1">[読書] エリック・エヴァンスのドメイン駆動設計</h1>
+<p><code>#ドメイン駆動設計</code> <code>エヴァンス本</code></p>
+<h2 id="_2"><img alt="📕" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4d5.svg" title=":closed_book:" /> 読んだ本</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.shoeisha.co.jp/book/detail/9784798126708">エリック・エヴァンスのドメイン駆動設計 和智 右桂 翻訳 Eric Evans 著</a></td>
+<td align="center"><img alt="" src="https://www.seshop.com/original/images/product/13087/L.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3"><img alt="💪" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f4aa.svg" title=":muscle:" /> モチベーション</h2>
+<ul>
+<li>TDDやリファクタリング、デザインパターンをやって、DDDの入門系の本を読んでやっと本題といったところですね。</li>
+<li>ボリュームのデカさやわかりにくさに定評(？)はありますが、やはり原本をちゃんと読んでおくことは、最初にDDDの話をはじめたエリック・エヴァンスの思考のプロセスをなぞることができるので読んでおくべきといったところで、読んでみました。</li>
+</ul>
+<h2 id="_4"><img alt="🕐" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f550.svg" title=":clock1:" /> かかった時間など</h2>
+<ul>
+<li>2022/12/15 〜 2023/1/30</li>
+<li>スタディプラスの記録によると、34時間くらい。</li>
+<li>500Pくらいありますが、手を動かす系の本ではなかったので、OS自作本と比べたら、意外にもさらっとおわった気もします。</li>
+<li>とはいえ、大変でした。</li>
+</ul>
+<h2 id="_5"><img alt="😄" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f604.svg" title=":smile:" /> 理解メモ(復習)</h2>
+<h3 id="_6">第一部：ドメインモデルを機能させる</h3>
+<ul>
+<li>知識の噛み砕き<ul>
+<li>効果的なモデリングの要素<ol>
+<li>モデルと実装を結びつける</li>
+<li>モデルに基づいて言語を洗練させる</li>
+<li>知識豊富なモデルを開発する</li>
+<li>モデルを蒸留する</li>
+<li>ブレインストーミングと実験をおこなう</li>
+</ol>
+</li>
+<li>つまり、ドメイン知識を噛み砕いて深く理解し、コードに落とし込むことが大事。</li>
+<li>ドメインは複雑。役に立つモデルは表層にないことが多い。モデルの蒸留、噛み砕きが必要で、そこに注力したい</li>
+<li>開発体制について<ul>
+<li>仲介者的にアナリストが入ると、コーダーにドメイン知識が入りくいので、必然的にコードにもドメイン知識が反映されにくい</li>
+<li>また、アナリストが仲介すると、開発者がモデルをつかったり、小さくつくったものをみせてフィードバックを得て改善していくプロセスが得られない</li>
+<li>外注すると、コードは納品されてもドメイン知識と技術を理解した人が他のところに異動してしまう。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ユビキタス言語について<ul>
+<li>最初は、ユビキタス言語をつかってもうまくドメインを表現できずにモデルも表現できないかもしれない。どちらが先かの因果関係も捉えにくい</li>
+<li>粘り強くユビキタス言語をつかうことが重要。違和感があれば言語自体を改善していく。これがドメインモデルにも反映できる</li>
+<li>ドメインエキスパートは、ドメインについて不適切だったり使いにくい用語や構造に意義をとなえる</li>
+<li>開発者は、設計を妨害することになる曖昧さや不整合に目を光らせる</li>
+<li>要求と設計は分離して考えるべきというのもあるが、要求はプロセスを経て研ぎ澄まされていくもの</li>
+</ul>
+</li>
+<li>ドキュメントについて<ul>
+<li>「XPの美学＝すべてはコードに語らせる」のスタンスのうえで、ドキュメントはコードや会話の表現を補わなければならない</li>
+<li>手書きの図は、むしろ形式張らないでその場かぎりのコミュニケーションであるという印象を示すことができる</li>
+<li>ドキュメントを最小限にとどめ、その焦点をコードとの会話の補足に限定することでドキュメントがプロジェクトに結び付けられた状態を保つことができる</li>
+</ul>
+</li>
+<li>モデル駆動設計<ul>
+<li>分析が技術的な配慮から妥協した貧弱なものであってはならない</li>
+<li>ドメインに対する考え方を反映しているが、ソフトウェア設計の原則を避けた出来の悪い設計も受け入れられない</li>
+<li>「ユーザモデルと設計・実装モデル」の差異を、開発者をドメインエキスパートとの間で埋めていく</li>
+<li>技術的な理由が背景になることを説明するかどうか迷うこともあるかもしれないが、それにより、ユーザがソフトウェアの潜在能力に触れられるようになり、ユーザが一貫した予測可能なものになるので必要</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">第二部：モデル駆動設計の構成要素</h3>
+<ul>
+<li>レイヤードアーキテクチャ<ul>
+<li>3層 + ドメイン層</li>
+<li>コールバックやオブザーバー(デザインパターン)によってレイヤー同士を疎結合にする。DI、MVC、いろいろあるが分離さえできればどんなアプローチでも構わない</li>
+<li>フレームワークは利用する際に、ドメインの設計を制限する前提を多く設けすぎてしまうものでないか注意が必要</li>
+</ul>
+</li>
+<li>アンチパターン「利口なUI」<ul>
+<li>利用なUIにしちゃったほうが簡単だし、レイヤードアーキテクチャにするには学習コストや文化を根付かせるコストがかかり、その利点をうけられるのが僅かなように感じられる</li>
+<li>アプリケーションの統合は困難で、データベースを経由させるしかなくなる。</li>
+<li>迅速な開発ができても、ビジネスロジックの抽象化がかけているためリファクタリングが進まない</li>
+<li>複雑さにすぐに覆い尽くされて、改善がしにくくなる</li>
+</ul>
+</li>
+<li>ソフトウェアでモデルを表現する<ul>
+<li>エンティティ</li>
+<li>値オブジェクト</li>
+<li>サービス</li>
+<li>モジュール</li>
+</ul>
+</li>
+<li>ドメインオブジェクトのライフライクル<ul>
+<li>集約</li>
+<li>ファクトリ</li>
+<li>リポジトリ</li>
+</ul>
+</li>
+<li>7章 → 貨物輸送システムの例</li>
+</ul>
+<h3 id="_8">第三部：より深い洞察へ向かうリファクタリング</h3>
+<ul>
+<li>8章.ブレイクスルー！！<ul>
+<li>銀行のシンジケートローンを管理する巨大アプリケーションでの例</li>
+<li>ファシリティの分担率とローンの分担率が別であるということに気が付き、シェアバイという概念でモデルがかなりシンプルになった。</li>
+<li>ブレイクスルーがおきるのは、適度なリファクタリングを何度も行ったあとだった。</li>
+<li><strong>僅かな改良をためらわずやり、あまりに遠い先をみて麻痺しないこと</strong></li>
+<li>そこからさらにどんどん設計がよくなった。トランザクションとポジションという概念がうまれるブレイクスルーが新たにおきた。</li>
+<li>多くのプロジェクトは、この段階になると、すでに構築したものの量と複雑さに足を取られて身動きができなくなるのだが、このプロジェクトではどんどん加速することになった。</li>
+</ul>
+</li>
+<li>9章.暗黙的な概念を明示的にする<ul>
+<li>概念を掘り出す</li>
+<li>言葉に耳を傾ける</li>
+<li>ぎこちなさを精査する</li>
+<li>矛盾について熟考する</li>
+<li>文献を読む</li>
+<li>何度も挑戦すること</li>
+</ul>
+</li>
+<li>「仕様」パターン<ul>
+<li>検証</li>
+<li>選択</li>
+<li>要求に応じた構築（生成）</li>
+</ul>
+</li>
+<li>10章.しなやかな設計<ul>
+<li>複雑なふるまいをするソフトウェアの設計が優れたものでないと、リファクタリングは進まない</li>
+<li>レガシーさによって保守が難しくなる状態を避け、楽しく仕事ができて変更を呼び込むような設計（しなやかな設計）が欠かせない</li>
+<li>多重レイヤーなどのオーバーエンジニアリングによって開発がスムーズにいかなくなることがある。シンプルなほうがよい</li>
+<li>シンプルにつくるのは難しい。適度に厳密な設計スタイルが必要</li>
+<li>しなやかな設計に求められるもの<ul>
+<li>クライアント開発者が幅広いシナリオを組み立てることができるようにつくること</li>
+<li>設計自身を変更しようとする人にとっても役に立つものにすること</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>レガシーの保守に飲み込まれないためのプラクティス集<ul>
+<li><strong>意図の明白なインタフェース（Intention-Revealing Interfaces)</strong><ul>
+<li>名前だけで意図がわかるようにする</li>
+</ul>
+</li>
+<li><strong>副作用のない関数(Side-Efect-Free-Functions)</strong><ul>
+<li>副作用のない操作は、メソッドではなく、関数(Function)と呼ばれる</li>
+</ul>
+</li>
+<li><strong>表明(Assertions)</strong><ul>
+<li>副作用があるものについては、どんな副作用なのかを明らかにする</li>
+</ul>
+</li>
+<li><strong>概念の輪郭(Conceptial Contours)</strong><ul>
+<li>設計における粒度は、細かすぎると呼び出し側にロジックの組み立てを強制し、複雑化し、粒度をそろえるのにも苦労する。</li>
+<li>技術駆動のリファクタリングではなく、ドメイン駆動のリファクタリングで概念の輪郭でちょうどよい粒度を模索する</li>
+</ul>
+</li>
+<li><strong>独立したクラス(Standalone classes)</strong><ul>
+<li>最も入り組んだ処理を独立したクラスとして分解するように試みる。</li>
+<li>これは、他とつながりの深い値オブジェクトをモデル化すると実現できそう</li>
+<li>あらゆることを恣意的にプリミティブにして、結合度を下げてモデルの表現力をさげることは避けたい</li>
+</ul>
+</li>
+<li><strong>閉じた操作(Closure of Operations)</strong><ul>
+<li>数学の加算の概念や、XMLがXSLTで表現される再帰的な閉じられた集合としての概念がある</li>
+<li>つまり、戻り値の型が引数の型と同じにできる場合は、そのように操作を定義すること</li>
+<li>値オブジェクトの操作では、このパターンが最も頻繁に適用できる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>設計の宣言的スタイル<ul>
+<li>論理演算子(AND、OR、NOT)といった演算子をつかって組み合わせることができ「閉じた操作」にできる</li>
+<li>重要で一般的な仕様があらゆる種類の仕様につかえるということであればGenericsをつかって抽象化ができる</li>
+<li>抽象化した仕様に論理演算向けのメソッドを追加すると使いやすくなる</li>
+</ul>
+</li>
+<li>13章. より深い洞察へ向かうリファクタリング<ul>
+<li>開始<ul>
+<li>コードの持つぎこちなさをや、複雑さへの対応から始まる</li>
+<li>その原因がコードのつくりの問題でなく、ドメインモデルにあるかもしれないと考えることから始まる</li>
+</ul>
+</li>
+<li>探求チーム<ul>
+<li>ユビキタス言語の駆使</li>
+</ul>
+</li>
+<li>先達の技<ul>
+<li>アナリシスパターンのような書籍を参考にするのも有効。車輪の再発明を避ける</li>
+</ul>
+</li>
+<li>開発者のための設計<ul>
+<li>しなやかな設計による開発者への恩恵を侮るべからず</li>
+</ul>
+</li>
+<li>リファクタリングを積極的にすべきタイミング<ul>
+<li>設計がドメインに関するチームの現在の理解を表現していない</li>
+<li>重要な概念が設計で暗黙的になっている</li>
+<li>設計において重要な部分を、よりしなやかにする好機がある</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>問題がおきているときにドメインとマッチしていないことに気づくことがあり、それは好機なのだが、むしろ危機と捉えられることが多い → 好機ととらえよう！</li>
+</ul>
+<h3 id="_9">第四部：戦略的設計</h3>
+<ul>
+<li>規模が大きくなっても、ドメイン駆動設計が実装と結びつかないモデルを作り出すことはない</li>
+<li>３つの原則<ul>
+<li>コンテキスト：ドメインを矛盾が生じないように境界づける</li>
+<li>蒸留：最も付加価値のある特別な側面を目立たせて、その部分にできる限り多くの力を与えるような構造にする必要がある</li>
+<li>大規模な構造：全体像をつくる。木を見て森を見ずにならないようにする</li>
+</ul>
+</li>
+<li>大規模開発でドメイン駆動設計に取り組むときの課題<ul>
+<li>エンターブライズシステムの中で、車輪の再発明は避けたいが、それらの相互の関係がどうなるかについて、慎重になる必要がある</li>
+<li>巨大なシステムのドメインモデル全体を完全に統一することは、現実的でなく、コストにも見合わない</li>
+<li>単一のモデルをつかって万人を満足させようとすれば、選択肢が複雑になり、モデルを使うのが難しくなる</li>
+</ul>
+</li>
+<li><strong>境界づけられたコンテキスト</strong><ul>
+<li>巨大なプロジェクトであれば、複数のモデルが存在する。境界を認識せずにそれらを混ぜ合わせると、バグの温床となり、信頼できなくなり、理解しにくくなる</li>
+<li>境界の引き方は、通常チームが編成されて人々が交流するやり方で決まり、その方法だと問題が生じる</li>
+<li>コンテキストの明確な境界は、アプリケーションに特有の部分が持つ用途、コードベースやデータベーススキーマなどの 物理的な表現などの観点から設定すること。</li>
+<li>別なコンテキスト同士は、用語法、概念、ルール、ユビキタス言語の方言が違う</li>
+<li><strong>継続的な統合(Continuous Integration)</strong><ul>
+<li>コンテキストを細かく分けすぎてしまうと、ドメインへの理解が進んだ後の統合が難しくなる<ul>
+<li>自分の取り組んでいる概念が、別のモデルにあることに気づかず、重複してしまう</li>
+<li>既存の機能を壊すことを恐れて手を加えられない</li>
+</ul>
+</li>
+<li>継続的な統合は実装と対になる。以下の環境を整える<ul>
+<li>CI/CDによる継続的なデプロイ</li>
+<li>自動化されたテストスイート</li>
+<li>統合する期間を設定。統合されない期間に対して妥当な短さの上限を設定。できるだけトラ  ンクベース開発に</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>コンテキストマップ(Context Map)</strong><ul>
+<li>境界づけられたコンテキストにそれぞれの名前をつけ、その名前をユビキタス言語の一部にす  る</li>
+<li>コミュニケーションに必要な変換を明示的にして、共有するものは強調する</li>
+<li>コンテキストマップはありのままを表すように頻度高くメンテナンスする</li>
+<li>コンテキストマップ内の矛盾には、果敢に取り組んで調整して、明示的にする必要がある。こ  のとき、明らかな間違いから取り組み、小さくステップを踏みながら、変更を適用していく</li>
+<li>コンテキストの境界をテストで保護するのは重要</li>
+<li>境界づけられたコンテキストには、それぞれかならず名前をつける</li>
+<li>全員がどの境界があるのかを知っている必要があり、コードのどの一部をとってもコンテキス  トを認識できなければいけない</li>
+</ul>
+</li>
+<li><strong>共有カーネル(Shared Kernel)</strong><ul>
+<li>それぞれ別なチームが1からものをつくってしまうと、「継続的な統合」を行うよりも多くの時  間が必要になってしまう危険がある。</li>
+<li>２つのチームが共有することに合意したドメインモデルのサブセットを指定する。</li>
+<li>共有カーネルは、設計の他の要素ほどは自由に変更できない</li>
+<li>共有カーネルは、コアドメインであることも多いし、複数の汎用サブドメインの集合であるこ  ともある</li>
+</ul>
+</li>
+<li><strong>顧客／供給者の開発チーム(Customer/Suppier Development Teams)</strong><ul>
+<li>上流のサブシステムと下流のサブシステムでは、上流のサブシステムが下流への影響を考慮し  て安易に変更できないことがある</li>
+<li>ここで、明確な顧客と供給者という関係を作っておき、連絡手段、提供スケジュールの約束を  チーム全員が理解できるような体制をつくる</li>
+<li>共同でテストを統合して、「継続的な統合」=CI/CDの一部として実行されるようにする</li>
+</ul>
+</li>
+<li><strong>順応者(Conformist)</strong><ul>
+<li>上流／下流の関係にあるにも関わらず、上流との関係がうまく行かない背景にある場合、下流  が自分でなんとかするしかない</li>
+<li>境界づけられたコンテキスト間の複雑な変換を取り除き、上流にできるだけ合わせることで大  幅な簡略化を見込む</li>
+<li>上流モデルに強く依存するので、実際には選択すべきときに選択できないことが多い</li>
+<li>順応者は、共有カーネルに似ているが、違う点は、上流・下流の協力具合。下流が一方的に順  応しなければならない点。</li>
+</ul>
+</li>
+<li><strong>腐敗防止層</strong><ul>
+<li>コンテキスト境界の変換層が複雑になり、巨大になり、その場しのぎになりということは、十  分ありえること</li>
+<li>インフラストラクチャ層の技術的な違いを吸収するのは、本来の腐敗防止層の役目ではない</li>
+<li>FacadeやAdapterパターンを適用する</li>
+<li>統合の要件が広がってきて、変換のコストがかなり大きくなったときには、順応者パターンへ  舵をきる判断も必要</li>
+</ul>
+</li>
+<li><strong>別々の道(Separate ways)</strong><ul>
+<li>統合は高くつくが、それによる利益は小さいことがある<ul>
+<li>統合が必須であるということではない</li>
+<li>境界づけられたコンテキストを他とは一切つながりを持たないものと宣言する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>公開ホストサービス(Open Host Service)</strong><ul>
+<li>サブシステムに対する需要が高いとわかったときには、より柔軟なアプローチが必要</li>
+<li>サブシステムとほかのサブシステムとの連携でそれぞれに変換サービスをつくっていると、保  守すべきものが増えていき困ることがある。</li>
+<li>需要の高いサブシステムにプロトコルとしてのサービスを集合として定義する。</li>
+<li>公開ホストサービスとして、つくるのは、複数のサブシステム向けの共通したもの。あるチー  ムにだけ特有の要求は従来どおり変換をつかうこと</li>
+</ul>
+</li>
+<li><strong>公表された言語(Published Language)</strong><ul>
+<li>2つのドメインモデルを共存させ、その間での情報のやりとりをすることが必須であるならば、  変換プロセス自体が複雑化することもある。</li>
+<li>公開される言語として、公開ホストサービスのように一般的な言語を公表する</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>『盲人と象』John Godfray Saxe 1816-1887<ul>
+<li>統合する必要がなければ、それぞれが別々に扱っていても問題にならないが、統合が必要であれば、互いに意見が一致していないということを認めるだけで多くの価値が得られる</li>
+<li>モデルを統一するのは難しい。誰も自分のモデルを断念して他の人のモデルを採用しそうにない</li>
+<li>更に、同じ部位(鼻)に対して違う意見(消防ホースなど)も混ざっているとさらに難易度がます</li>
+<li>複数のドメインモデルがぶつかり合っていることを認識することは、単に現実と向き合っているにすぎない</li>
+</ul>
+</li>
+<li>モデルコンテキスト戦略<ul>
+<li>チームが独立して活動することの価値と直接的で豊かな統合の価値との間で考えるべき</li>
+<li>かかるコストの一部を見積もって伝えそれを軽減する方策を講じながらやる。コンテキストマップから初めて、組織構成の変更は現実と向き合ってやること</li>
+</ul>
+</li>
+<li>蒸留<ul>
+<li>蒸留：混ざりあったコンポーネントを分離するプロセス</li>
+<li>コアドメイン：蒸留によって、抽出したい特別に価値がある１つのコンポーネント</li>
+</ul>
+</li>
+<li>蒸留による効果<ol>
+<li>システム全体の設計と、設計同士の関係をチームメンバー全員が把握できる</li>
+<li>ユビキタス言語に入れやすいサイズのコアモデルを識別できる</li>
+<li>リファクタリングの指針となる</li>
+<li>モデルで最も価値がある領域に作業を集中させる</li>
+<li>アウトソーシング、既製のコンポーネントの利用、その割当について決定する際の指針となる</li>
+</ol>
+</li>
+<li>大規模な構造<ul>
+<li>アーキテクチャがドメインモデルの領域に乗り出すとそれ自体が足枷になることがある</li>
+<li>指針となるルールに問題があるのではなく、ルールの厳格さや成り立ちに問題があり、それが適切になれば、開発の妨げになるどころか役立つものになる</li>
+<li>概念上の大きな構造は、アプリケーションとともに進化させる必要がある</li>
+<li><strong>システムのメタファ(System Metaphor)</strong><ul>
+<li>Firewall、レイヤー、カーネルといったメタファを活用</li>
+<li>メタファをつかうことによる理解の齟齬が逆にうまれるかもしれない</li>
+</ul>
+</li>
+<li><strong>責務のレイヤ(Responsibility Layers)</strong><ul>
+<li>依存関係から上位、下位を与えることができる</li>
+<li>ドメインの部分の変更についてその変化の割合を原因も調べる。</li>
+<li>自然と生まれた階層があれば、それらの責務を明確にする</li>
+</ul>
+</li>
+<li><strong>知識レベル(Knowledge Level)</strong><ul>
+<li>知識レベルとは、他のオブジェクトグループがどうふるまうべきかを記述するオブジェクトグループ</li>
+</ul>
+</li>
+<li><strong>着脱可能コンポーネントのフレームワーク(Pluggable Component Framework)</strong><ul>
+<li>抽象化されたコアを蒸留し、そのインタフェースの多様な実装を自由に置換できるようにするフレームワークをつくること</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>戦略的設計上の意思決定を行うために欠かせない6つのこと<ol>
+<li>意思決定はチーム全体に伝えなければならない</li>
+<li>意思決定プロセスはフィードバックを吸収しなければならない</li>
+<li>計画は進化を許容しなければならない</li>
+<li>アーキテクチャチームが最も優秀な人材をすべて吸い上げてはならない</li>
+<li>戦略的設計にはミニマリズムと謙虚さが必要である</li>
+<li>オブジェクトはスペシャリストだが、開発者はジェネラリストである</li>
+</ol>
+</li>
+</ul>
+<h2 id="_10"><img alt="🎉" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f389.svg" title=":tada:" /> 感想</h2>
+<ul>
+<li>いやぁ、むずかしい本でしたが、ちんぷんかんぷんで理解できないということではなく、「とても重要なことを言っている」という感覚は得られましたw。</li>
+<li>とはいえ、特に第四部は、理解できたかどうかかなり怪しいです。</li>
+<li>発行自体は古い本なのですが、アジャイル開発やDevOpsとの関連を強く感じる内容だったのはひとつ驚きでした。</li>
+<li>予想よりも第四部の分散アーキテクチャの部分がかなり力をいれてボリューミーに書かれていた印象を受けました。これまで私が読んだドメイン駆動設計関連の本ではあまり出てきていなかったので、原本ではこうなのか、という印象がありました。</li>
+<li>明快な「これを実践すれば間違いない」というメッセージよりも、現場のつらみやあるあるの課題から得た、よかったプラクティスを紹介してあり、それを紹介しつつも「とはいえこういう別な課題もあるよ」「こういう意味だから解釈間違えないでね」というメッセージの論調が多かった印象です。</li>
+<li>つまり、本には具体的なプラクティスが書かれているのですが、むしろそれにいたる考え方を学ぶことができ、アジャイル、TDD、アーキテクチャ、DevOpsをやっていく理由やつながりを感じながら、設計へのスタンスのあり方を感じられる一冊だったかもしれません。</li>
+<li>これで原書を読んでなにが書かれていたのか一旦頭に入れておくことはできたので、他のドメイン駆動設計に関する本を読むときに、どう解釈すべきなのか答え合わせをすることはできそうです。</li>
+<li>これを実践できるようになるのは、だいぶ先な感覚がありますが、小さくステップを踏んでいくしかないですね。</li>
+</ul>
+<h2 id="_11"><img alt="🔭" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/1f52d.svg" title=":telescope:" /> 今後の展望</h2>
+<ul>
+<li>一旦、整理やまとめ、解釈の答え合わせとして、以下のSoftware Designのドメイン駆動設計特集も読んでおきたいと思います。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://gihyo.jp/magazine/SD/archive/2023/202302">Software Design 2023年2月号</a></td>
+<td align="center"><img alt="" src="https://img.fujisan.co.jp/images/products/backnumbers/2344903_p.jpg" /></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>iDDD、PoEAA、クリーンアーキテクチャも読むとさらにDDDの理解が深まりそうですが、先は長いですね。</li>
+<li>まだあまり良くわかっていないデータ中心アプローチのほうもスタディしたいです。まったくわかっていないので、こっちのほうが優先度高めでしょうか。イノシシ本。かなりボリューミーです。。</li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      最終更新日: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 29, 2024</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="フッター">
+      
+        
+        <a href="../../2022/zero-osdev-22_31/" class="md-footer__link md-footer__link--prev" aria-label="前: [読書] ゼロからのOS自作入門(後編)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                前
+              </span>
+              [読書] ゼロからのOS自作入門(後編)
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/ngwork0301" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/ngwork0301" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://zenn.dev/ngw" target="_blank" rel="noopener" title="zenn.dev" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://ngwork0301.github.io/feed_rss_created.xml" target="_blank" rel="noopener" title="ngwork0301.github.io" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\u3000\u3001\u3002\uff0c\uff0e]+", "search.placeholder": "\u691c\u7d22", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
